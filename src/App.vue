@@ -1,30 +1,63 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <Navbar />
+    <router-view />
   </div>
-  <router-view />
 </template>
 
+<script>
+import Navbar from './components/Navbar';
+
+export default {
+  name: 'App',
+  components: {
+    Navbar
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap');
+
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--ff-default);
 }
 
-#nav {
-  padding: 30px;
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--clr-bg);
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+:root {
+  /*==== COLOR VARIABLES===*/
+  --clr-text: hsl(210, 10%, 8%);
+  --clr-input: hsl(0, 0%, 58%);
+  --clr-input-hover: hsla(0, 0%, 52%, 0.2);
+  --clr-bg: hsl(0, 0%, 95%);
+  --clr-elements: hsl(0, 0%, 100%);
+  --clr-box-shadow: hsl(0, 0%, 88%);
+
+  /*==== TYPOGRAPHY VARIABLES===*/
+  --fs-homepage: 14px;
+  --fs-details: 16px;
+  --ff-default: 'Poppins', sans-serif;
+  --fw-regular: 400;
+  --fw-medium: 600;
+  --fw-bold: 800;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+h1,
+h2,
+h3,
+h4,
+span,
+p {
+  color: var(--clr-text);
 }
 </style>
