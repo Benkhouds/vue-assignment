@@ -11,7 +11,9 @@
       </div>
     </div>
     <Spinner :status="isLoading" v-show="isLoading" />
-    <span>{{ countries.length }}</span>
+    <div class="total-countries">
+      <span>{{ countries.length }} out of 250</span>
+    </div>
     <div v-if="countries" class="country-container">
       <CountryCard
         v-for="(country, index) in countries"
@@ -73,6 +75,12 @@ export default {
 <style scoped>
 * {
   font-size: var(--fs-homepage);
+}
+.total-countries {
+  margin: 1rem 0;
+}
+.total-countries span {
+  font-weight: var(--fw-medium);
 }
 .main-container {
   padding: 0 2rem;

@@ -97,8 +97,7 @@ export default {
   display: flex;
   justify-content: space-between;
   color: var(--clr-text);
-  line-height: 2rem;
-  padding: 0.2rem 1rem;
+  padding: 0.6rem 1rem;
   cursor: pointer;
 }
 

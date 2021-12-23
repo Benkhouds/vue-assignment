@@ -3,7 +3,6 @@ import axios from '@/config';
 export default createStore({
   state: {
     countries: [],
-    sortedCountries: [],
     selectedOrder: null,
     selectedRegion: '',
     regions: ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'],
