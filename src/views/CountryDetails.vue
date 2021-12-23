@@ -3,7 +3,7 @@
     <Spinner v-if="isLoading" />
     <div class="container" v-if="!isLoading && country">
       <div class="btn" @click="goBack">
-        <fa-icon :icon="['fas', 'arrow-left']" class="icon"></fa-icon>
+        <fa-icon :icon="['fas', 'arrow-left']"></fa-icon>
         <span>Back</span>
       </div>
       <div class="country-details">

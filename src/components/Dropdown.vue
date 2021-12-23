@@ -10,6 +10,9 @@
         @click="select(option)"
       >
         {{ option }}
+        <span v-if="option === selected">
+          <fa-icon :icon="['fas', 'check']"></fa-icon>
+        </span>
       </div>
     </div>
   </div>
@@ -52,12 +55,8 @@ export default {
 .dropdown {
   position: relative;
   width: 60%;
-  margin: 0 auto;
   color: var(--clr-text);
   background-color: var(--clr-elements);
-  margin-top: 2rem;
-  margin-inline: 1.5rem;
-  padding: 1rem 1.5rem;
   box-shadow: 0 1px 3px var(--clr-box-shadow);
   border-radius: 10px;
 }
@@ -65,10 +64,11 @@ export default {
 .selected {
   background-color: var(--clr-elements);
   color: var(--clr-text);
-  padding-left: 1em;
+  padding: 1rem 2rem;
   cursor: pointer;
   font-weight: var(--fw-medium);
   font-size: 0.75rem;
+  border-radius: 10px;
 }
 
 .selected::after {
@@ -94,9 +94,11 @@ export default {
 }
 
 .items div {
+  display: flex;
+  justify-content: space-between;
   color: var(--clr-text);
   line-height: 2rem;
-  padding-left: 2em;
+  padding: 0.2rem 1rem;
   cursor: pointer;
 }
 
@@ -106,10 +108,8 @@ export default {
 
 @media (min-width: 1440px) {
   .dropdown {
-    width: 15%;
-    margin-left: auto;
-    margin-right: 4.5rem;
-    padding: 1rem 1.5rem;
+    width: 50%;
+    margin-left: 1rem;
   }
 
   .selected::after {

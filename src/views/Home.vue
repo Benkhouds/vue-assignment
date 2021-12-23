@@ -1,11 +1,17 @@
 <template>
-  <div>
-    <div class="main-container">
-      <!-- Search  -->
-      <!-- Sort -->
-      <Filter @filterActive="filter = true" />
+  <div class="main-container">
+    <div class="header">
+      <SearchField />
+      <div class="dropdown-container">
+        <Sort @sortActive="sort = true" />
+        <Filter
+          @filterActive="filter = true"
+          @filterInactive="filter = false"
+        />
+      </div>
     </div>
     <Spinner :status="isLoading" v-show="isLoading" />
+    <span>{{ countries.length }}</span>
     <div v-if="countries" class="country-container">
       <CountryCard
         v-for="(country, index) in countries"
@@ -17,26 +23,34 @@
 </template>
 
 <script>
+import SearchField from '@/components/SearchField';
 import Filter from '@/components/Filter';
+import Sort from '@/components/Sort';
 import Spinner from '@/components/Spinner';
 import CountryCard from '@/components/CountryCard';
 
 export default {
   name: 'Home',
   components: {
+    SearchField,
     Filter,
+    Sort,
     Spinner,
     CountryCard
   },
   data() {
     return {
-      filter: false
+      filter: false,
+      sort: false
     };
   },
   computed: {
+    selectedOrder() {
+      return this.$store.getters.selectedOrder;
+    },
     countries() {
-      if (this.filter) {
-        return this.$store.getters.filteredCountries;
+      if (this.filter || this.sort) {
+        return this.$store.getters.computedCountries;
       }
       return this.$store.getters.countries;
     },
@@ -44,9 +58,11 @@ export default {
       return !this.countries.length ? this.$store.getters.isLoading : false;
     }
   },
+
   created() {
     //fetching data only when the application is first created
     //the data is only re-fetched on reload
+    console.log('home created');
     if (!this.$store.getters.countries.length) {
       this.$store.dispatch('fetchAllCountries');
     }
@@ -59,19 +75,26 @@ export default {
   font-size: var(--fs-homepage);
 }
 .main-container {
+  padding: 0 2rem;
+}
+.header {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 2rem;
 }
 .country-container {
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   flex-direction: column;
 }
 @media (min-width: 800px) {
+  .main-container {
+    padding: 0 5rem;
+  }
   .country-container {
     display: grid;
-    padding: 1rem 5rem;
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -80,8 +103,12 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
   }
-  .main-container {
+  .header {
     margin: 1rem 0 0;
+  }
+  .dropdown-container {
+    display: flex;
+    width: 30%;
   }
 }
 </style>
