@@ -11,8 +11,8 @@
       </div>
     </div>
     <Spinner :status="isLoading" v-show="isLoading" />
-    <div class="total-countries">
-      <span>{{ countries.length }} out of 250</span>
+    <div class="total-countries" v-if="countries.length">
+      <span>{{ countries.length }}</span> out of 250
     </div>
     <div v-if="countries" class="country-container">
       <CountryCard

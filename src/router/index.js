@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '@/views/Home.vue';
+import NotFound from '@/views/NotFound.vue';
 import CountryDetails from '@/views/CountryDetails';
 import nProgress from 'nprogress';
 const routes = [
@@ -15,13 +16,14 @@ const routes = [
     props: true
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/:catchAll(.*)',
+    name: '404',
+    component: NotFound
+  },
+  {
+    path: '/404/:resource',
+    name: '404Resource',
+    component: NotFound
   }
 ];
 

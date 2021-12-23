@@ -61,19 +61,19 @@ export default {
   },
   async mounted() {
     this.isLoading = true;
+    const countryCode = this.$route.params.countryCode;
     try {
-      const countryCode = this.$route.params.countryCode;
       const {
         data: [country]
       } = await axios.get('/alpha/' + countryCode);
-      console.log(country);
-      this.country = country;
 
-      /* next((component) => {
-        component.country = country;
-      }); */
+      this.country = country;
     } catch (err) {
       console.log(err);
+      this.$router.push({
+        name: '404Resource',
+        params: { resource: countryCode }
+      });
     } finally {
       this.isLoading = false;
     }
